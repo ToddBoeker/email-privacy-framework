@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { width: 400px; padding: 16px; font-family: Arial, sans-serif; }
+        .header { text-align: center; background: #2c3e50; color: white; padding: 10px; border-radius: 8px; }
+        .status { background: #e8f5e8; padding: 12px; border-radius: 6px; margin: 10px 0; }
+        .activity { background: #f8f9fa; padding: 8px; border-radius: 4px; margin: 5px 0; font-size: 12px; }
+        .tab { background: #34495e; color: white; padding: 8px; margin: 2px; border-radius: 4px; cursor: pointer; }
+        .tab.active { background: #e74c3c; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .setting { margin: 8px 0; padding: 8px; background: white; border-radius: 4px; border-left: 3px solid #3498db; }
+        .history-entry { margin: 5px 0; padding: 5px; background: #f8f9fa; border-radius: 3px; font-size: 11px; }
+        .btn { background: #2196F3; color: white; border: none; padding: 8px; width: 100%; border-radius: 4px; cursor: pointer; margin: 2px 0; }
+        .btn-success { background: #4CAF50; }
+        .btn-warning { background: #FF9800; }
+        .btn-danger { background: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h3 style="margin: 0;">🛡️ Email Privacy Framework</h3>
+        <p style="margin: 4px 0 0 0; font-size: 12px;">Enhanced v2.0</p>
+    </div>
+    
+    <div class="tabs">
+        <span class="tab active" data-tab="status">Status</span>
+        <span class="tab" data-tab="settings">Settings</span>
+        <span class="tab" data-tab="history">History</span>
+        <span class="tab" data-tab="testing">Testing</span>
+    </div>
+
+    <!-- Status Tab -->
+    <div id="status" class="tab-content active">
+        <div class="status">
+            <p><strong>✅ ENHANCED FRAMEWORK ACTIVE</strong></p>
+            <p>Real-time policy enforcement enabled</p>
+        </div>
+        <div id="activityLog">
+            <div class="activity">Enhanced features loaded →</div>
+        </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settings" class="tab-content">
+        <h4>Privacy Settings</h4>
+        <div class="setting">
+            <label><input type="checkbox" id="stripTracking"> Remove tracking pixels</label>
+        </div>
+        <div class="setting">
+            <label><input type="checkbox" id="warnExternal"> Warn about external content</label>
+        </div>
+        <div class="setting">
+            <label><input type="checkbox" id="blockExecutables"> Block executable attachments</label>
+        </div>
+        <div class="setting">
+            <label><input type="checkbox" id="logPolicyHistory"> Log policy history</label>
+        </div>
+        <div class="setting">
+            <label><input type="checkbox" id="showNotifications"> Show notifications</label>
+        </div>
+        <button class="btn btn-success" id="saveSettings">Save Settings</button>
+    </div>
+
+    <!-- History Tab -->
+    <div id="history" class="tab-content">
+        <h4>Policy History</h4>
+        <button class="btn" id="refreshHistory">Refresh History</button>
+        <button class="btn btn-warning" id="clearHistory">Clear History</button>
+        <div id="historyList">
+            <div class="history-entry">No policy history yet...</div>
+        </div>
+    </div>
+
+    <!-- Testing Tab -->
+    <div id="testing" class="tab-content">
+        <h4>Testing Tools</h4>
+        <button class="btn" id="manualTest">Manual Test</button>
+        <button class="btn" id="simulatePolicy">Simulate Detection</button>
+        <button class="btn" id="testAll">Test All Features</button>
+        <button class="btn btn-success" id="getSettings">Current Settings</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

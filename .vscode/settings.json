@@ -1,0 +1,12 @@
+{
+    "python.defaultInterpreterPath": "./venv/bin/python",
+    "python.analysis.extraPaths": ["./src"],
+    "xml.validation.enabled": true,
+    "files.associations": {
+        "*.xsd": "xml",
+        "*.xml": "xml"
+    },
+    "[python]": {
+        "editor.formatOnSave": true
+    }
+}

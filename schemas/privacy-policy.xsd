@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="urn:email:privacy:1.0"
+           xmlns:pp="urn:email:privacy:1.0"
+           elementFormDefault="qualified">
+  
+  <xs:element name="PrivacyPolicy" type="pp:PrivacyPolicyType"/>
+  
+  <xs:complexType name="PrivacyPolicyType">
+    <xs:sequence>
+      <xs:element name="Metadata" type="pp:MetadataType"/>
+      <xs:element name="Rules" type="pp:RulesType"/>
+      <xs:element name="Signature" type="pp:SignatureType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:decimal" use="required" fixed="1.0"/>
+  </xs:complexType>
+
+  <xs:complexType name="MetadataType">
+    <xs:sequence>
+      <xs:element name="Creator" type="xs:string"/>
+      <xs:element name="Created" type="xs:dateTime"/>
+      <xs:element name="Expires" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RulesType">
+    <xs:sequence>
+      <xs:element name="Rule" type="pp:RuleType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RuleType">
+    <xs:sequence>
+      <xs:element name="Description" type="xs:string" minOccurs="0"/>
+      <xs:element name="Condition" type="pp:ConditionType"/>
+      <xs:element name="Action" type="pp:ActionType"/>
+      <xs:element name="Scope" type="pp:ScopeType"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="priority" type="xs:integer" default="1"/>
+  </xs:complexType>
+
+  <xs:complexType name="ConditionType">
+    <xs:choice>
+      <xs:element name="XPath" type="xs:string"/>
+      <xs:element name="MIMEPattern" type="xs:string"/>
+      <xs:element name="Composite" type="pp:CompositeConditionType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="CompositeConditionType">
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="And" type="pp:ConditionType"/>
+      <xs:element name="Or" type="pp:ConditionType"/>
+      <xs:element name="Not" type="pp:ConditionType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="ActionType">
+    <xs:attribute name="type" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="allow"/>
+          <xs:enumeration value="warn"/>
+          <xs:enumeration value="strip"/>
+          <xs:enumeration value="block"/>
+          <xs:enumeration value="encrypt"/>
+          <xs:enumeration value="log"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="message" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="ScopeType">
+    <xs:attribute name="phase" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="at-rest"/>
+          <xs:enumeration value="in-transit"/>
+          <xs:enumeration value="at-use"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="SignatureType">
+    <xs:sequence>
+      <xs:element name="Digest" type="xs:base64Binary"/>
+      <xs:element name="Certificate" type="xs:base64Binary" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="algorithm" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>
