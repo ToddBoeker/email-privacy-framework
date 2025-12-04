@@ -79,7 +79,7 @@ Follow these steps to load the extension in Thunderbird's developer mode:
    
 
 4. **Enable Developer Mode**
-   - In the Extensions panel, look for a gear icon (⚙️) or settings menu
+   - In the Extensions panel, look for a gear icon or settings menu
    - Click it and select **Debug Add-ons** or **Developer Mode**
    - A new "Debugging" page will open
 
@@ -119,13 +119,15 @@ For testing with real email accounts or distribution:
     Generated in Google Account → Security → App passwords
     Required to sync your Gmail account email to Mozilla Thunderbird
     Your Gmail requires 2-factor authentication backup as a prequiste to releasing the 16-code
+    In the email-privacy-framework\tests\send_real_test.py file on lines 46 and 47 remove the placeholders YOUR_EMAIL = "c24439361@gmail.com" and APP_PASSWORD = "xxxx" 
+    Now enter your gmail address on line 46 and your 16-code on line 47
+
 
 4. **Install in Thunderbird**
 
     Go to Add-ons page in Thunderbird
     Click gear icon → Install Add-on From File
-    When prompted, enter the 16-digit verification code
-
+    When prompted, enter the 16-digit verification 16-code
 
 
 
